@@ -1,0 +1,8 @@
+{
+  "name": "Lila Dhar Bhatta - Portfolio",
+  "description": "Academic portfolio and teaching archive of Lila Dhar Bhatta, Assistant Professor of English Education at Ghanteshwar Multiple Campus, Nepal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
