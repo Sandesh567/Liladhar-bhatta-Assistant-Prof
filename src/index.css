@@ -1,0 +1,584 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: 'Newsreader', 'Source Serif 4', Georgia, serif;
+  --font-hand: 'Caveat', cursive, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  
+  --color-board-light: #F3F1EB;
+  --color-board-dark: #171B20;
+  
+  --color-ink-light: #1C2128;
+  --color-ink-dark: #E9E6DE;
+  
+  --color-accent-blue-light: #1F3A5F;
+  --color-accent-blue-dark: #9DB8E3;
+  
+  --color-accent-red-light: #A93226;
+  --color-accent-red-dark: #E8938A;
+  
+  --color-accent-green-light: #20563F;
+  --color-accent-green-dark: #8CC9A8;
+}
+
+/* ==========================================================================
+   DESIGN TOKENS & MAINTENANCE
+   Theme Preset: GRAPHITE (Dark-anodized matte architectural aluminum)
+   ========================================================================== */
+:root {
+  /* Frame & Tray Industrial Hardware Tokens */
+  --frame-thickness: clamp(7px, 0.8vw, 11px);
+  --frame-face-1: #30353C;
+  --frame-face-2: #1E2227;
+  --frame-highlight: rgba(255, 255, 255, 0.14);
+  --frame-shadow: rgba(0, 0, 0, 0.45);
+  --tray-floor: #15181C;
+  --tray-face: #242930;
+  --tray-text: rgba(233, 230, 222, 0.78);
+  --tray-text-active: #FBFAF6;
+  --tray-accent: #E8938A;
+  --focus-ring: #9DB8E3;
+
+  /* Architectural Environment Tokens */
+  --wall-bg: #13171F;
+  --wall-vignette: #0A0D12;
+  --board-bg: #FAF8F4;
+  --ink-primary: #1C2128;
+  --ink-secondary: #475467;
+  --ink-muted: #8896A6;
+  --ink-faded: #4B5563;
+  --accent-blue: #1F3A5F;
+  --accent-red: #A93226;
+  --accent-green: #20563F;
+  --paper-card: #FBFAF6;
+  --note-ochre: #F5EFEB;
+  --note-sage: #EBF2EC;
+  --wall-margin: clamp(12px, 2.2vw, 32px);
+
+  /* Stationery Card Color Tones */
+  --card-sand: #F8F6F0;
+  --card-sage: #F2F5F1;
+  --card-slate: #F1F4F8;
+  --card-clay: #F6F2EE;
+}
+
+.dark {
+  /* Frame & Tray Industrial Hardware Tokens (Dim Lecture Room) */
+  --frame-thickness: clamp(7px, 0.8vw, 11px);
+  --frame-face-1: #2B3037;
+  --frame-face-2: #20252A;
+  --frame-highlight: rgba(255, 255, 255, 0.08);
+  --frame-shadow: rgba(0, 0, 0, 0.65);
+  --tray-floor: #15181C;
+  --tray-face: #1E2329;
+  --tray-text: rgba(233, 230, 222, 0.78);
+  --tray-text-active: #FBFAF6;
+  --tray-accent: #E8938A;
+  --focus-ring: #9DB8E3;
+
+  /* Architectural Environment Tokens */
+  --wall-bg: #14171B;
+  --wall-vignette: #0D0F13;
+  --board-bg: #171B20;
+  --ink-primary: #E9E6DE;
+  --ink-secondary: #9CA3AF;
+  --ink-muted: #6B7280;
+  --ink-faded: #9CA3AF;
+  --accent-blue: #9DB8E3;
+  --accent-red: #E8938A;
+  --accent-green: #8CC9A8;
+  --paper-card: #20262E;
+  --note-ochre: #242A30;
+  --note-sage: #1F2826;
+
+  --card-sand: #1E242B;
+  --card-sage: #1B2421;
+  --card-slate: #1D232A;
+  --card-clay: #242022;
+}
+
+@media (max-width: 699px) {
+  :root, .dark {
+    --frame-thickness: 6px;
+    --wall-margin: clamp(6px, 1.8vw, 10px);
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY ALIASES (Clean Editorial Design)
+   ========================================================================== */
+.font-editorial-serif {
+  font-family: var(--font-serif);
+  font-feature-settings: "cv01", "cv02", "liga", "kern";
+}
+
+.font-clean-sans {
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+}
+
+.font-annotation {
+  font-family: var(--font-hand);
+}
+
+.eyebrow-editorial {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+}
+
+/* ==========================================================================
+   DOCUMENT & ARCHITECTURAL WALL SETUP
+   Wall never scrolls; viewport is fixed stage
+   ========================================================================== */
+html, body {
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--wall-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100%;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Architectural Wall: Dark charcoal slate with soft illumination */
+.wall-surface {
+  background-color: var(--wall-bg);
+  background-image: 
+    radial-gradient(circle at 50% 30%, #1e2430 0%, #141820 50%, #0a0d12 95%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.008) 0px, rgba(255, 255, 255, 0.008) 1px, transparent 1px, transparent 4px);
+}
+
+.dark .wall-surface {
+  background-color: var(--wall-bg);
+  background-image: 
+    radial-gradient(circle at 50% 30%, #171d26 0%, #0d1015 60%, #06080b 100%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.006) 0px, rgba(255, 255, 255, 0.006) 1px, transparent 1px, transparent 4px);
+}
+
+.wall-editorial {
+  background-color: var(--wall-bg);
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+}
+
+/* ==========================================================================
+   1. THE WHITEBOARD MOUNT: High-End Architectural Whiteboard (Reference Outline)
+   ========================================================================== */
+.whiteboard-mount {
+  width: min(calc(100% - 2 * var(--wall-margin)), 1560px);
+  height: calc(100dvh - 2 * var(--wall-margin));
+  border-radius: 18px;
+  background-color: var(--board-bg);
+  box-shadow: 
+    0 0 0 1px #94A3B8,
+    0 0 0 4px #CBD5E1,
+    0 0 0 5px #94A3B8,
+    0 25px 60px -15px rgba(0, 0, 0, 0.65),
+    0 10px 25px -5px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dark .whiteboard-mount {
+  box-shadow: 
+    0 0 0 1px #334155,
+    0 0 0 4px #1E293B,
+    0 0 0 5px #334155,
+    0 25px 60px -15px rgba(0, 0, 0, 0.85),
+    0 10px 25px -5px rgba(0, 0, 0, 0.60);
+}
+
+
+/* ==========================================================================
+   3. BOARD ENAMEL SURFACE & RECESSED REVEAL GAP
+   ========================================================================== */
+.satin-enamel-surface {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  contain: paint;
+  border-radius: 2px 2px 0 0;
+  background-color: var(--board-bg);
+  background-image: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.05) 40%, transparent 65%),
+    radial-gradient(ellipse at 35% 10%, rgba(255, 255, 255, 0.20) 0%, transparent 55%);
+  box-shadow: 
+    inset 0 1px 0 var(--frame-highlight),
+    inset 1px 0 0 var(--frame-highlight),
+    inset 0 2px 4px var(--frame-shadow),
+    inset 2px 0 3px rgba(0, 0, 0, 0.35),
+    inset -1px 0 2px rgba(0, 0, 0, 0.20);
+}
+
+.dark .satin-enamel-surface {
+  background-color: var(--board-bg);
+  background-image: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.01) 40%, transparent 65%),
+    radial-gradient(ellipse at 35% 10%, rgba(255, 255, 255, 0.025) 0%, transparent 55%);
+  box-shadow: 
+    inset 0 1px 0 var(--frame-highlight),
+    inset 1px 0 0 var(--frame-highlight),
+    inset 0 3px 6px var(--frame-shadow),
+    inset 2px 0 4px rgba(0, 0, 0, 0.55),
+    inset -1px 0 2px rgba(0, 0, 0, 0.35);
+}
+
+.whiteboard-surface-calm {
+  background-color: var(--board-bg);
+}
+
+/* ==========================================================================
+   4. THE TRAY: Continuous Architectural Ledge
+   ========================================================================== */
+.architectural-tray {
+  position: relative;
+  width: calc(100% + 8px);
+  margin-left: -4px;
+  margin-right: -4px;
+  margin-bottom: -4px;
+  border-radius: 0 0 3px 3px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 
+    0 6px 14px -3px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  z-index: 30;
+}
+
+.tray-floor {
+  height: 22px;
+  background-color: var(--tray-floor);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    inset 0 3px 5px rgba(0, 0, 0, 0.65),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.40);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+}
+
+.tray-front-face {
+  height: clamp(38px, 5vh, 44px);
+  background-color: var(--tray-face);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 
+    inset 0 -1px 0 rgba(0, 0, 0, 0.40);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+@media (max-width: 699px) {
+  .architectural-tray {
+    width: 100%;
+    margin: 0;
+    border-radius: 0 0 2px 2px;
+  }
+  .tray-floor {
+    display: none !important;
+  }
+  .tray-front-face {
+    height: 56px;
+    padding: 0 8px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+.tray-nav-scroll {
+  mask-image: linear-gradient(to right, transparent, black 14px, black calc(100% - 14px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 14px, black calc(100% - 14px), transparent);
+}
+
+@media (min-width: 900px) {
+  .tray-nav-scroll {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+/* ==========================================================================
+   5. TRAY NAVIGATION TYPOGRAPHY & INTERACTION
+   ========================================================================== */
+.tray-nav-item {
+  color: var(--tray-text);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.45);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  transition: color 150ms ease, opacity 150ms ease;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  white-space: nowrap;
+  padding: 0 0.5rem;
+}
+
+.tray-nav-item:hover,
+.tray-nav-item:focus-visible {
+  color: #FFFFFF;
+}
+
+.tray-nav-item.is-active {
+  color: var(--tray-text-active);
+  font-weight: 600;
+}
+
+.tray-marker-underline {
+  position: absolute;
+  bottom: 3px;
+  left: 6px;
+  right: 6px;
+  height: 4px;
+  pointer-events: none;
+}
+
+.tray-marker-underline path {
+  stroke: var(--tray-accent);
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+  animation: drawMarkerUnderline 260ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes drawMarkerUnderline {
+  from {
+    stroke-dashoffset: 60;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tray-marker-underline path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+.tray-front-face button:focus-visible,
+.tray-front-face a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   6. TOP MARGIN CONTROLS (Handwritten Whiteboard Style)
+   ========================================================================== */
+.board-text-link {
+  color: var(--accent-blue);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  text-decoration: none;
+  transition: color 150ms ease;
+  user-select: none;
+}
+
+.board-text-link .link-arrow {
+  transition: transform 180ms ease;
+}
+
+.board-text-link:hover .link-arrow,
+.board-text-link:focus-visible .link-arrow {
+  transform: translateY(2px);
+}
+
+.board-text-link .hover-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 2px;
+  right: 2px;
+  height: 4px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.board-text-link .hover-underline path {
+  stroke: var(--accent-blue);
+  stroke-dasharray: 70;
+  stroke-dashoffset: 70;
+  transition: stroke-dashoffset 240ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.board-text-link:hover .hover-underline path,
+.board-text-link:focus-visible .hover-underline path {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-text-link .link-arrow {
+    transition: none !important;
+  }
+  .board-text-link .hover-underline path {
+    transition: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   7. SCROLLBAR: Slim 6px Thumb Inside Right Margin
+   ========================================================================== */
+.board-page-scroller,
+.board-scroll-area,
+.scene-scroller {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(28, 33, 40, 0.35) transparent;
+}
+
+.dark .board-page-scroller,
+.dark .board-scroll-area,
+.dark .scene-scroller {
+  scrollbar-color: rgba(233, 230, 222, 0.35) transparent;
+}
+
+.board-page-scroller::-webkit-scrollbar,
+.board-scroll-area::-webkit-scrollbar,
+.scene-scroller::-webkit-scrollbar {
+  width: 6px;
+}
+
+.board-page-scroller::-webkit-scrollbar-track,
+.board-scroll-area::-webkit-scrollbar-track,
+.scene-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.board-page-scroller::-webkit-scrollbar-thumb,
+.board-scroll-area::-webkit-scrollbar-thumb,
+.scene-scroller::-webkit-scrollbar-thumb {
+  background: rgba(28, 33, 40, 0.35);
+  border-radius: 9999px;
+}
+
+.dark .board-page-scroller::-webkit-scrollbar-thumb,
+.dark .board-scroll-area::-webkit-scrollbar-thumb,
+.dark .scene-scroller::-webkit-scrollbar-thumb {
+  background: rgba(233, 230, 222, 0.35);
+}
+
+.board-page-scroller::-webkit-scrollbar-thumb:hover,
+.board-scroll-area::-webkit-scrollbar-thumb:hover,
+.scene-scroller::-webkit-scrollbar-thumb:hover {
+  background: rgba(28, 33, 40, 0.55);
+}
+
+.dark .board-page-scroller::-webkit-scrollbar-thumb:hover,
+.dark .board-scroll-area::-webkit-scrollbar-thumb:hover,
+.dark .scene-scroller::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 230, 222, 0.55);
+}
+
+/* ==========================================================================
+   8. STATIONERY CARDS, TAPES, MAGNETS & HIGHLIGHTS
+   ========================================================================== */
+.paper-card-shadow,
+.stationery-card {
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 8px 20px -4px rgba(0, 0, 0, 0.09);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.dark .paper-card-shadow,
+.dark .stationery-card {
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 10px 28px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* Delicate translucent washi tape */
+.tape-delicate,
+.masking-tape {
+  background: rgba(235, 230, 215, 0.65);
+  backdrop-filter: blur(1px);
+  border-left: 1px dashed rgba(160, 150, 135, 0.45);
+  border-right: 1px dashed rgba(160, 150, 135, 0.45);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.dark .tape-delicate,
+.dark .masking-tape {
+  background: rgba(70, 75, 85, 0.55);
+  border-color: rgba(110, 115, 125, 0.3);
+}
+
+/* Soft highlight wash */
+.highlight-soft {
+  background: rgba(31, 58, 95, 0.08);
+  padding: 1px 6px;
+  border-radius: 3px;
+  border-bottom: 1.5px solid rgba(31, 58, 95, 0.35);
+}
+
+.dark .highlight-soft {
+  background: rgba(157, 184, 227, 0.12);
+  border-bottom: 1.5px solid rgba(157, 184, 227, 0.4);
+}
+
+.ceramic-magnet {
+  background: radial-gradient(circle at 35% 30%, #444D5A 0%, #1A2028 75%);
+  box-shadow: 
+    1px 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.dark .ceramic-magnet {
+  background: radial-gradient(circle at 35% 30%, #586577 0%, #222933 75%);
+  box-shadow: 
+    1px 2px 5px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Safe Area Insets for Mobile */
+.pb-safe {
+  padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0.625rem));
+}
+.pt-safe {
+  padding-top: max(1rem, env(safe-area-inset-top, 1rem));
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
