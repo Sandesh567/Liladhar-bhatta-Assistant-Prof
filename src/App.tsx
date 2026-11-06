@@ -250,10 +250,23 @@ export default function App() {
      -------------------------------------------------------------------------- */
   useEffect(() => {
     document.title = 'Asst. Professor LilaDhar Bhatta';
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
+
+    try {
+      const savedTheme = localStorage.getItem('bhatta_theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        setIsDarkMode(savedTheme === 'dark');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        return;
+      }
+    } catch {}
+
+    // Default to light mode on mobile/phones unless the user explicitly chooses dark mode.
+    setIsDarkMode(false);
+    document.documentElement.classList.remove('dark');
   }, []);
 
   const toggleDarkMode = () => {
@@ -264,6 +277,11 @@ export default function App() {
       } else {
         document.documentElement.classList.remove('dark');
       }
+
+      try {
+        localStorage.setItem('bhatta_theme', next ? 'dark' : 'light');
+      } catch {}
+
       return next;
     });
   };
