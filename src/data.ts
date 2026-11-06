@@ -1,5 +1,5 @@
 export const CONFIG = {
-  PROFILE_IMAGE_SRC: "/profile.jpg",
+PROFILE_IMAGE_SRC: "/profile.jpg",
 PROFILE_IMAGE_ALT: "Portrait of Lila Dhar Bhatta, Assistant Professor of English Education",
 
   SIGNATURE_SRC: "",
