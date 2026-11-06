@@ -181,7 +181,7 @@ export const DATA = {
       role: "Secondary Level Eng. Language Teacher & Vice Principal",
       institution: "Far West Regional Police Boarding School",
       location: "Dhangadhi, Kailali, Nepal",
-      periodBs: "2057/9/1 – 2067/1/1 B.S. (Vice Principal: 2064 – 2067 B.S.)",
+      periodBs: "(Vice Principal: 2064 – 2067 B.S.) ",
       periodAd: "2001 – 2010 A.D.",
       isCurrent: false,
       tier: "aged",
